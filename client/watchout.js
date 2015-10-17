@@ -3,11 +3,6 @@
 
 //create the gameBoard 
 
-// var svg = d3.select("body").append("svg")
-//   .append("g")
-//   .attr("x", x)
-//   .attr("y", y)
-//   .attr("transform", "translate(" + x + "," + y + ")");
 
 var gameBoard  = d3.select('body').append('svg')
   .attr('width', 800)
@@ -77,6 +72,8 @@ var enemy8 = gameBoard.append('circle')
 
 var enemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, enemy8];
 
+
+
 var enemies = gameBoard.selectAll('circle').data([400,400,300,300,500,600,700])
   .enter()
   .append('circle')
@@ -90,19 +87,43 @@ var enemies = gameBoard.selectAll('circle').data([400,400,300,300,500,600,700])
 
 
 var player = gameBoard.append('circle')
+  .attr('class', 'player')
   .attr('cx', 400)
   .attr('cy', 300)
   .attr('r', 10)
   .attr('fill', 'orange');
 
 
- //Create a player w/ a player class
-    //define the shape of the player
-    //add color attribute
+// var svg = d3.select("body").append("svg")
+//   .append("g")
+//   .attr("x", x)
+//   .attr("y", y)
+//   .attr("transform", "translate(" + x + "," + y + ")");
 
- //Create some enemies w/ an enemy class
-     //define the shape of the enemy
-    //add color attribute
+
+var clickPlayer = function() {
+  if (d3.event.defaultPrevented) return;
+  var point = d3.mouse(this) //extracts click location
+  , p = {x: point[0], y: point[1] };
+
+  svg.append("circle")
+      .attr("transform", "translate(" + p.x + "," + p.y + ")")
+      .attr("r", "5")
+      .attr("class", "dot")
+      .style("cursor", "pointer")
+      .call(drag);
+}
+
+d3.event('circle.player').on("click", clickPlayer);
+
+var drag = d3.behavior.drag()
+    .on("drag", movePlayer);
+
+var movePlayer = function(d) {
+  var x = d3.event.x;
+  var y = d3.event.y;
+  d3.select(this).attr("transform", "translate(" + x + "," + y + ")");
+}
 
  // var createEnemyNode = d3.select("span").data("svg")
  //  .enter()
@@ -113,14 +134,15 @@ var player = gameBoard.append('circle')
  //  .attr("border-color", "white");
   // .attr("color", white);
 
- //Create a function where enemies move randomly (setInterval maybe) and have their coordinates "TRANSFORMED"
- // var moveEnemy = function(x,y){
- //  var randX = Math.floor(Math.random() * 600);
- //  var randY = Math.floor(Math.random() * 400);
- //  return randX, randY;
- // };
+// Create a function where enemies move randomly (setInterval maybe) and have their coordinates "TRANSFORMED"
 
- // setInterval(moveEnemy, 1000);
+ var moveEnemy = function(x,y){
+  var randX = Math.floor(Math.random() * 600);
+  var randY = Math.floor(Math.random() * 400);
+  return randX, randY;
+ };
+
+ setInterval(moveEnemy, 1000);
  
  //Create the score, set to zero
  var score = 0;
