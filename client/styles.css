@@ -3,3 +3,27 @@
 /* Note: an asteroid image is included in this repo.
 Feel free to use it if you like. */
 
+body, html {
+  background-image: url("BackgroundForAsteroids.png");
+  background-size: cover cover cover;
+}
+
+.player {
+  color: white;
+}
+
+.enemy {
+  color: blue;
+}
+
+.score {
+}
+
+div {
+  background-color: white;
+  font-family: Myriad, Sans-serif;
+  font-size: 1vh 15vw;
+  text-decoration: none;
+  text-align:center;
+}
+ /* font-size vh or vw number is % of width or height of viewport*/
