@@ -12,8 +12,10 @@ body, html {
   color: white;
 }
 
-.enemy {
+span.enemy {
   color: blue;
+  size: 500px;
+
 }
 
 .score {
@@ -26,4 +28,7 @@ div {
   text-decoration: none;
   text-align:center;
 }
+
+
+
  /* font-size vh or vw number is % of width or height of viewport*/
