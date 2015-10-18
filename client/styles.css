@@ -5,16 +5,17 @@ Feel free to use it if you like. */
 
 body, html {
   background-image: url("BackgroundForAsteroids.png");
-  background-size: cover cover cover;
+  background-size: cover;
 }
 
 .player {
   color: white;
 }
 
-span.enemy {
-  color: blue;
-  size: 500px;
+.enemies {
+  background-image: url('enemy.gif');
+  background-size: cover;
+  position: absolute;
 
 }
 

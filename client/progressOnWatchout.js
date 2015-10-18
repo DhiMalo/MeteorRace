@@ -79,17 +79,27 @@ var enemies = [enemy1, enemy2, enemy3, enemy4, enemy5, enemy6, enemy7, enemy8];
 
 
 
-var enemies = gameBoard.selectAll('circle').data([900,800,900,800,500,800,700])
+var enemies1 = gameBoard.selectAll('circle').data([30,30,30,30,30,30,30])
   .enter()
-  .append('circle')
+  .append('svg:circle')
+  .attr('class', 'enemy')
   .attr('width', function(d){return d})
   .attr('height', function(d){return d})
   .attr('cx', function(d, i){return i*Math.floor(Math.random() * gameParams.width/2)})
   .attr('cy', function(d, i){return i*Math.floor(Math.random() * gameParams.height/2)})
   .attr('fill', 'blue');
 
+var enemies = gameBoard.selectAll('.enemies')
+  .data(d3.range(10))
+  .attr('class', 'enemies')
+  .style({
+    'width': 10+'px',
+    'height': 10+'px'
+  })
 
-enemies.transition()
+enemies.enter()
+  .append('svg:circle')
+  .transition()
   .duration(1000)
   .delay(1500)
   .each('move', function(){d3.select(this.attr('fill', 'blue'))})
@@ -97,24 +107,10 @@ enemies.transition()
   .transition()
   .attr('cy', Math.floor(Math.random()*gameParams.height/2))
 
-
-
-
 var clickPlayer = d3.behavior.drag()
   .on('dragstart', function() {player.style('fill', 'orange');})
   .on('drag', function() {player.attr('cx', d3.event.x).attr('cy', d3.event.y);})
   .on('dragend', function() {player.style('fill', 'orange');});
-
-  // if (d3.event.defaultPrevented) return;
-  // var point = d3.mouse(this) //extracts click location
-  // , p = {x: point[0], y: point[1] };
-
-  // svg.append("circle")
-  //     .attr("transform", "translate(" + p.x + "," + p.y + ")")
-  //     .attr("r", "5")
-  //     .attr("class", "dot")
-  //     .style("cursor", "pointer")
-  //     .call(drag);
 
 
 var player = gameBoard.selectAll('.player')
@@ -128,23 +124,22 @@ var player = gameBoard.selectAll('.player')
   .call(clickPlayer)
   .style('fill', 'orange');
 
-
 // var svg = d3.select("body").append("svg")
 //   .append("g")
 //   .attr("x", x)
 //   .attr("y", y)
 //   .attr("transform", "translate(" + x + "," + y + ")");
 
-d3.select('circle.player').on("click", clickPlayer);
+// d3.select('circle.player').on("click", clickPlayer);
 
-var drag = d3.behavior.drag()
-    .on("drag", movePlayer);
+// var drag = d3.behavior.drag()
+//     .on("drag", movePlayer);
 
-var movePlayer = function(d) {
-  var x = d3.event.x;
-  var y = d3.event.y;
-  d3.select(this).attr("transform", "translate(" + x + "," + y + ")");
-}
+// var movePlayer = function(d) {
+//   var x = d3.event.x;
+//   var y = d3.event.y;
+//   d3.select(this).attr("transform", "translate(" + x + "," + y + ")");
+// }
 
  // var createEnemyNode = d3.select("span").data("svg")
  //  .enter()
@@ -157,13 +152,13 @@ var movePlayer = function(d) {
 
 // Create a function where enemies move randomly (setInterval maybe) and have their coordinates "TRANSFORMED"
 
- var moveEnemy = function(x,y){
-  var randX = Math.floor(Math.random() * 600);
-  var randY = Math.floor(Math.random() * 400);
-  return randX, randY;
- };
+ // var moveEnemy = function(x,y){
+ //  // var randX = Math.floor(Math.random() * 600);
+ //  var randY = Math.floor(Math.random() * 400);
+ //  return randX, randY;
+ // };
 
- setInterval(moveEnemy, 1000);
+ // setInterval(moveEnemy, 1000);
  
  //Create the score, set to zero
  var score = 0;
